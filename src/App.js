@@ -62,12 +62,18 @@ function App() {
         toggleMode={toggleMode}
       />
       <Alert alert={alert} />
-      <TextForm
-        heading="Enter the text to analyze"
-        mode={mode}
-        greenMode={greenMode}
-        showAlert={showAlert}
-      />
+      {/* <div className="container">
+        <About mode={mode} />
+      </div> */}
+      <div className="container my-3">
+        {" "}
+        <TextForm
+          heading="Textutils - Word Counter, Character Counter, Remove extra spaces"
+          mode={mode}
+          greenMode={greenMode}
+          showAlert={showAlert}
+        />
+      </div>
       {/* <div className="container my-3">
           <Routes>
             {/* /users.-->.component 1

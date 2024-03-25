@@ -31,11 +31,11 @@ export default function Navbar(props) {
                   Home
                 </a>
               </li>
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <a className="nav-link" href="/">
                   About
                 </a>
-              </li> */}
+              </li>
             </ul>
             <div
               className={`form-check form-switch text-${

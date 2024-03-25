@@ -29,6 +29,7 @@ export default function Textform(props) {
     var text = document.getElementById("my-box");
     text.select();
     navigator.clipboard.writeText(text.value);
+    document.getSelection().removeAllRanges();
     props.showAlert("Copied to Clipboard!", "success");
   };
 
@@ -48,7 +49,7 @@ export default function Textform(props) {
       <div
         className="container"
         style={{
-          color: props.mode === "dark" ? "white" : "black",
+          color: props.mode === "dark" ? "white" : "#042743",
         }}
       >
         <h1>{props.heading}</h1>
@@ -60,41 +61,72 @@ export default function Textform(props) {
             onChange={handleOnChange}
             rows="8"
             style={{
-              backgroundColor: props.mode === "dark" ? "grey" : "white",
-              color: props.mode === "dark" ? "white" : "black",
+              backgroundColor: props.mode === "dark" ? "#13466e" : "white",
+              color: props.mode === "dark" ? "white" : "#042743",
             }}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleUpClick}
+        >
           Convert to UpperCase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleLoClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleLoClick}
+        >
           Convert to LowerCase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleClear}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleClear}
+        >
           Clear
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleCopy}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleCopy}
+        >
           Copy
         </button>
 
-        <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-2 my-2"
+          onClick={handleExtraSpaces}
+        >
           Remove Extra Spaces
         </button>
       </div>
       <div
         className="container my-3"
         style={{
-          color: props.mode === "dark" ? "white" : "black",
+          color: props.mode === "dark" ? "white" : "#042743",
         }}
       >
         <h2>Your text summary</h2>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          words and {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").length} minutes read</p>
+        <p>
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          Minutes read
+        </p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Nothing to preview!"}</p>
       </div>
     </>
   );
